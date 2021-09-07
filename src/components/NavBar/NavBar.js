@@ -7,8 +7,8 @@ function NavBar() {
     <div className="navbar">
       <div>thebirrashop</div>
       <div>Inicio</div>
-      <div>cervezas</div>
-      <div>Compras</div>
+      <div>Zapatillas</div>
+      <div>Envios</div>
     </div>
   )
 }
