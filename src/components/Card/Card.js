@@ -1,8 +1,9 @@
 import * as React from "react";
+import ClickCounter from "../ClickCounter/ClickCounter";
 import styles from "./Card.module.css";
 
 
-const Card = ({ title, description, image, comprar }) => {
+const Card = ({ title, description, image, comprar, c }) => {
     console.log(styles);
     return (
       <div className={styles.card}>
@@ -12,6 +13,7 @@ const Card = ({ title, description, image, comprar }) => {
         <button className={styles.button} onClick={comprar}>
           ¡Comprar ahora!
         </button>
+        <ClickCounter/>
       </div>
     );
 };
