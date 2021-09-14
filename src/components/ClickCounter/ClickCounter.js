@@ -8,7 +8,9 @@ const ClickCounter = () => {
    
   };
   const handleRestar = () => {
-    setCounter((prevState) => prevState - 1);
+    if (counter > 0) { 
+    setCounter((prevState) => prevState - 1);  }
+    
   }
 
   return (
