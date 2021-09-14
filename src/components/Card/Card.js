@@ -3,7 +3,7 @@ import ClickCounter from "../ClickCounter/ClickCounter";
 import styles from "./Card.module.css";
 
 
-const Card = ({ title, description, image, comprar, c }) => {
+const Card = ({ title, description, image, comprar,  }) => {
     console.log(styles);
     return (
       <div className={styles.card}>

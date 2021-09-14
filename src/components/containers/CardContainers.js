@@ -2,30 +2,40 @@ import React from 'react'
 import Card from "../Card/Card"
 
 const CardContainers = () => {
+  const [items, setItems] = React.useState([]);
+  const [cargando, setCargando] = React.useState(false);
+
+  React.useEffect(() => {
+    setCargando(true);
+    getProducts()
+      .then((result) => setItems(result))
+      .finally(() => setCargando(false));
+  }, []);
     const comprarProducto = (product) => {
         console.log(`Has comprado el producto: ${product}`);
+      };
+      const getProducts = () => {
+        return new Promise((resolve) => {
+          setTimeout(() => resolve(productos), 2000);
+        });
       };
     return (
         <div>
                 <div style={{ display: "flex", justifyContent: "space-evenly", marginTop: "1rem" }}>
-        <Card
-          title="zapatillas Fila Hombre "
-          description="Esta es la descripción del producto hombre fila"
-          image="https://sporting.vteximg.com.br/arquivos/ids/203992-1000-1000/9505584-120-00.jpg?v=637215151597830000"
-          comprar={comprarProducto}
-        />
-        <Card
-          title="Zapatillas Nike Mujer"
-          description="Esta es la descripción del producto Zapatillas mujer"
-          image="https://sporting.vteximg.com.br/arquivos/ids/294639-1000-1000/6H04599-000-1.jpg?v=637583176943400000"
-          comprar={comprarProducto}
-        />
-        <Card
-          title="Zapatillas Nike Hombres"
-          description="Esta es la descripción del producto nike"
-          image="https://sporting.vteximg.com.br/arquivos/ids/327483-350-350/4CJ1677-001-1.jpg?v=637627380916930000"
-          comprar={comprarProducto}
-        />
+                {cargando && <p style={{ fontSize: "2rem", margin: "2rem 0" }}>Cargando....</p>}
+                {!cargando &&
+        items?.map((producto) => {
+          return (
+            <Card
+              key={producto.id}
+              title={producto.title}
+              description={producto.description}
+              image={producto.image}
+              price={producto.price}
+              comprar={comprarProducto}
+            />
+          );
+        })}
         </div>
         </div>
     )
@@ -43,7 +53,7 @@ export default CardContainers
 const productos = [
     {
       id: 0,
-      title: "Mochila",
+      title: "Zapatillas nike",
       description: "Esta es la descripción del producto 1",
       price: 10000,
       image: "https://cdn1.static-tgdp.com/ui/productimages/approved/std.lang.all/62/64/696264_sized_1800x1200_rev_1.jpg",

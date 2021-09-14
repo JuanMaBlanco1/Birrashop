@@ -4,6 +4,7 @@ const ClickCounter = () => {
   const [counter, setCounter] = React.useState(0);
 
   const handleSumar = () => {
+    
     setCounter((prevState) => prevState + 1);
    
   };
