@@ -2,29 +2,65 @@ import React from 'react'
 import Card from "../Card/Card"
 
 const CardContainers = () => {
-  const [items, setItems] = React.useState([]);
-  const [cargando, setCargando] = React.useState(false);
+  const [data, setData] = React.useState([]);
+  const [loading, setLoading] = React.useState(false);
+  const [error, setError] = React.useState(null);
 
   React.useEffect(() => {
-    setCargando(true);
-    getProducts()
-      .then((result) => setItems(result))
-      .finally(() => setCargando(false));
+    const url = "https://fakestoreapi.com/products";
+
+    setLoading(true);
+    fetch(url)
+      .then((response) => {
+        console.log(response.body, "response")
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw response;
+        }
+      })
+      .then((data) => setData(data))
+     /* .catch((error) => setError(error))*/ 
+      .catch((error) => console.log(error,"error" ))
+      .finally(() => setLoading(false));
   }, []);
-    const comprarProducto = (product) => {
-        console.log(`Has comprado el producto: ${product}`);
-      };
-      const getProducts = () => {
-        return new Promise((resolve) => {
-          setTimeout(() => resolve(productos), 2000);
-        });
-      };
-    return (
-        <div>
-                <div style={{ display: "flex", justifyContent: "space-evenly", marginTop: "1rem" }}>
-                {cargando && <p style={{ fontSize: "2rem", margin: "2rem 0" }}>Cargando....</p>}
-                {!cargando &&
-        items?.map((producto) => {
+
+  const comprarProducto = (product) => {
+    console.log(`Has comprado el producto: ${product}`);
+  };
+  fetch('https://fakestoreapi.com/products')
+            .then(res=>res.json())
+            .then(json=>console.log(json))
+
+  const postProduct = async () => {
+    const newProduct = {
+      title: "Zapatillas nike ",
+      description: "zapatillas de hombre",
+      price: 10008,
+      image: "https://fotos.perfil.com/2020/01/08/con-el-vision-s-sony-incursiona-en-el-mundo-de-los-autos-853254.jpg",
+    };
+
+    const response = await fetch("http://localhost:3001/products", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newProduct),
+    });
+
+    return response.json();
+  };
+
+  return (
+    <>
+      <button onClick={postProduct}>Cargar nuevo producto</button>
+      <div style={{ display: "flex", justifyContent: "space-evenly", flexWrap: "wrap" }}>
+        {loading && <p>Cargando...</p>}
+        {error && (
+          <p>
+            Ha habido un error: {error.status} {error.statusText}
+          </p>
+        )}
+
+        {data?.map((producto) => {
           return (
             <Card
               key={producto.id}
@@ -36,75 +72,13 @@ const CardContainers = () => {
             />
           );
         })}
-        </div>
-        </div>
-    )
-}
+      </div>
+    </>
+  );
+};
 
-export default CardContainers
-
-
+export default CardContainers;
 
 
 
 
-
-
-const productos = [
-    {
-      id: 0,
-      title: "Zapatillas nike",
-      description: "zapatillas urbanas ultimo modelo",
-      price: 20000,
-      image: "https://www.moovbydexter.com.ar/on/demandware.static/-/Sites-dabra-catalog/default/dw725c6174/products/NI_AH6789-012/NI_AH6789-012-1.JPG",
-    },
-    {
-      id: 1,
-      title: "Remera Jordan PSG Wordmark",
-      description: "Para todas las edades",
-      price: 5000,
-      image: "https://www.moovbydexter.com.ar/on/demandware.static/-/Sites-dabra-catalog/default/dw3c4b203f/products/NI_CK9785-010/NI_CK9785-010-1.JPG",
-    },
-    {
-      id: 2,
-      title: "Short Puma",
-      description: "Short Deportivo",
-      price: 10002,
-      image: "https://www.moovbydexter.com.ar/on/demandware.static/-/Sites-dabra-catalog/default/dw6089ea92/products/PU_534599-01/PU_534599-01-1.JPG",
-    },
-    {
-      id: 3,
-      title: "Buzo adidas Hulk",
-      description: "Para Adultos",
-      price: 13000,
-      image: "https://www.moovbydexter.com.ar/on/demandware.static/-/Sites-dabra-catalog/default/dw47fa540c/products/AD_GP3458/AD_GP3458-1.JPG",
-    },
-    {
-      id: 4,
-      title: "Musculosa Jordan Mujer",
-      description: "Para chicas",
-      price: 2500,
-      image: "https://www.moovbydexter.com.ar/on/demandware.static/-/Sites-dabra-catalog/default/dw83408811/products/NI_DD0285-382/NI_DD0285-382-1.JPG",
-    },
-    {
-      id: 5,
-      title: "Zapatillas Pumas",
-      description: "Todos los talles",
-      price: 9500,
-      image: "https://www.moovbydexter.com.ar/on/demandware.static/-/Sites-dabra-catalog/default/dw3ff65584/products/PU_381517-04/PU_381517-04-1.JPG",
-    },
-    {
-      id: 6,
-      title: "Pantalon Puma",
-      description: "Pantalon Hombres",
-      price: 8500,
-      image: "https://www.moovbydexter.com.ar/on/demandware.static/-/Sites-dabra-catalog/default/dw46e2957c/products/PU_531514-64/PU_531514-64-1.JPG",
-    },
-    {
-      id: 7,
-      title: "Calzan Mujer",
-      description: "Calzas Mujer",
-      price: 6500,
-      image: "https://www.moovbydexter.com.ar/on/demandware.static/-/Sites-dabra-catalog/default/dw2059aaee/products/PU_530847-28/PU_530847-28-1.JPG",
-    },
-  ];
