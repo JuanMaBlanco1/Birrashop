@@ -2,9 +2,12 @@ import React from "react";
 
 import "./App.css";
 
-import CardContainers from "./components/containers/CardContainers";
-import Header from "./components/Header/Header";
 import NavBar from "./components/NavBar/NavBar";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import Home from "./pages/Home";
+import NotFound from "./pages/NotFound";
+import Quienes from "./pages/Quienes"
+import ProductDetail from "./pages/ProductDetail";
 
 
 
@@ -12,16 +15,22 @@ const App = () => {
   
   return( 
 
-    <div>
+     
+      <BrowserRouter>
       <NavBar />
-      <h1 className="title">Bienvenido</h1>
-      <div>
-    <p >Tienda de Zapatillas Deportivas </p>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/Quienes" component={Quienes} />
+       
+       <Route exact path="/product/:id" component={ProductDetail} />
+
+        <Route path="*" component={NotFound} />
+      </Switch>
+      <footer>Esto es un footer.</footer>
+      </BrowserRouter>
+     
+  
     
-    <Header/>
-    <CardContainers/>
-    </div>
-    </div>
   );
 };
 export default App;
