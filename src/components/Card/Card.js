@@ -2,6 +2,7 @@ import * as React from "react";
 
 import styles from "./Card.module.css";
 import { Link } from "react-router-dom";
+import ClickCounter from "../ClickCounter/ClickCounter";
 
 
 const Card = ({ title, description, image, comprar, price, productId  }) => {
@@ -16,6 +17,7 @@ const Card = ({ title, description, image, comprar, price, productId  }) => {
         </div>
         <p className={styles.price}>$ {price}</p>
         </Link>
+        <ClickCounter/>
         <button className={styles.button} onClick={comprar}>
           ¡Comprar ahora!
         </button>

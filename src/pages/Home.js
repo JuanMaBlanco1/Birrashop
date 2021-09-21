@@ -5,7 +5,7 @@ import CardContainers from "../components/containers/CardContainers";
 const Home = () => {
   return (
     <div>
-      <h1>Home</h1>
+      <h1>Productos</h1>
       <Header name="Tienda de Zapatillas" />
       <CardContainers />
     </div>

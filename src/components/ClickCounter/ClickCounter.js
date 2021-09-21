@@ -16,7 +16,7 @@ const ClickCounter = () => {
 
   return (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", margin: "1rem 0" }}>
-      <p>Clicks: {counter}</p>
+      <p>Cantidad: {counter}</p>
       <br />
       <button onClick={handleSumar}>Sumar</button>
       <button onClick={handleRestar}>Restar</button>
