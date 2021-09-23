@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import Quienes from "./pages/Quienes"
 import ProductDetail from "./pages/ProductDetail";
+import Card from "./pages/Card"
 
 
 
@@ -23,7 +24,7 @@ const App = () => {
         <Route exact path="/Quienes" component={Quienes} />
        
        <Route exact path="/product/:id" component={ProductDetail} />
-
+       <Route exact path="/Card" component={Card} />
         <Route path="*" component={NotFound} />
       </Switch>
       <footer>Esto es un footer.</footer>

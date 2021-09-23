@@ -1,25 +1,19 @@
 import * as React from "react";
 
-const ClickCounter = () => {
-  const [counter, setCounter] = React.useState(0);
-
-  const handleSumar = () => {
-    
-    setCounter((prevState) => prevState + 1);
-   
-  };
-  const handleRestar = () => {
-    if (counter > 0) { 
-    setCounter((prevState) => prevState - 1);  }
-    
-  }
-
+const ClickCounter = ({ counter, handleSumar, handleRestar }) => {
   return (
-    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", margin: "1rem 0" }}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        margin: "1rem 0",
+      }}
+    >
       <p>Cantidad: {counter}</p>
       <br />
-      <button onClick={handleSumar}>Sumar</button>
-      <button onClick={handleRestar}>Restar</button>
+      <button onClick={handleSumar}>+</button>
+      <button onClick={handleRestar}>-</button>
     </div>
   );
 };

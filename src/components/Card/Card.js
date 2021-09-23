@@ -5,8 +5,20 @@ import { Link } from "react-router-dom";
 import ClickCounter from "../ClickCounter/ClickCounter";
 
 
-const Card = ({ title, description, image, comprar, price, productId  }) => {
-  
+const Card = ({ title, description, image, handleComprarProducto, price, productId  }) => {
+  const [counter, setCounter] = React.useState(0);
+  console.log(counter)
+  const handleSumar = () => {
+    
+    setCounter((prevState) => prevState + 1);
+   
+  };
+  const handleRestar = () => {
+    if (counter > 0) { 
+    setCounter((prevState) => prevState - 1);  }
+    
+  }
+  const producto = {title, description, image, price, productId}
     return (
       <div className={styles.card}>
         <Link style={{ textDecoration: "none", color: "inherit" }} to={`/product/${productId}`}>
@@ -17,11 +29,13 @@ const Card = ({ title, description, image, comprar, price, productId  }) => {
         </div>
         <p className={styles.price}>$ {price}</p>
         </Link>
-        <ClickCounter/>
-        <button className={styles.button} onClick={comprar}>
+        <ClickCounter counter = {counter} handleSumar ={handleSumar} handleRestar  ={handleRestar} />
+        <Link style={{ textDecoration: "none", color: "inherit" }} to={`/Card/`}>
+     
+        <button className={styles.button} onClick={()=>handleComprarProducto(producto, counter)}>
           ¡Comprar ahora!
         </button>
-        
+        </Link>
       </div>
     );
 };

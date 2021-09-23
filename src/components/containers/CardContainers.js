@@ -26,12 +26,11 @@ const CardContainers = () => {
       .finally(() => setLoading(false));
   }, []);
 
-  const comprarProducto = (product) => {
-    console.log(`Has comprado el producto: ${product}`);
+  const handleComprarProducto = (producto, counter) => {
+    
+     console.log(`Has comprado el producto: ${producto}, ${counter}`); 
   };
-  fetch('https://fakestoreapi.com/products')
-            .then(res=>res.json())
-            .then(json=>console.log(json))
+
 
   const postProduct = async () => {
     const newProduct = {
@@ -69,7 +68,7 @@ const CardContainers = () => {
               description={producto.description}
               image={producto.image}
               price={producto.price}
-              comprar={comprarProducto}
+              handleComprarProducto={handleComprarProducto}
             />
           );
         })}
