@@ -9,8 +9,8 @@ import NotFound from "./pages/NotFound";
 import Quienes from "./pages/Quienes"
 import ProductDetail from "./pages/ProductDetail";
 import Card from "./pages/Card"
-
-
+import BlankPage from "./pages/BlankPage";
+import { CartProvider } from "./components/context/CartContext";
 
 const App = () => {
   
@@ -25,6 +25,7 @@ const App = () => {
        
        <Route exact path="/product/:id" component={ProductDetail} />
        <Route exact path="/Card" component={Card} />
+       <Route exact path="/blank" component={BlankPage} />
         <Route path="*" component={NotFound} />
       </Switch>
       <footer>Esto es un footer.</footer>
